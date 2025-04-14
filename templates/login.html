@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Login - Office Booking{% endblock %}
+
+{% block content %}
+<div class="login-container">
+    <h1>Office Booking System</h1>
+    <h2>Login</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="{{ url_for('login') }}">
+        <div class="form-group">
+            <label for="employee_id">Employee ID:</label>
+            <input type="number" id="employee_id" name="employee_id" required>
+        </div>
+        <div class="form-group">
+            <label>Login As:</label>
+            <input type="radio" id="employee" name="user_type" value="employee" checked>
+            <label for="employee">Employee</label>
+            <input type="radio" id="admin" name="user_type" value="admin">
+            <label for="admin">Admin</label>
+        </div>
+        <button type="submit">Login</button>
+    </form>
+</div>
+{% endblock %}

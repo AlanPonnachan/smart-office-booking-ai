@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Book a Seat{% endblock %}
+
+{% block content %}
+<div class="booking-container">
+    <header>
+        <h1>Office Seat Booking</h1>
+        <div class="user-info">
+            Welcome, {{ employee_info.name }} (ID: {{ employee_info.employee_id }}) - {{ employee_info.department }} / {{ employee_info.team }}
+            <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+        </div>
+    </header>
+
+    <div class="controls">
+        <div class="date-nav">
+            <label>Select Date:</label>
+            {% for date_str in available_dates %}
+            <button class="date-btn {% if date_str == initial_date %}active{% endif %}" data-date="{{ date_str }}">{{ date_str }}</button>
+            {% endfor %}
+        </div>
+
+        <!-- MODE SELECTION REMOVED -->
+        <!-- <div class="mode-nav"> ... </div> -->
+
+        <div class="floor-nav">
+            <label for="floor-select">Select Floor:</label>
+            <select id="floor-select">
+                {% for floor in floors %}
+                <option value="{{ floor }}">Floor {{ floor }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+
+    <div class="legend">
+        <span class="legend-item available"></span> Available
+        <span class="legend-item occupied"></span> Occupied
+        <span class="legend-item fixed"></span> Fixed Assignment
+        <span class="legend-item my-booking"></span> My Booking
+    </div>
+
+    <div id="seat-map-container">
+         <!-- CURRENT MODE DISPLAY REMOVED -->
+        <h2>Seat Map - Floor <span id="current-floor-display">1</span> | Date: <span id="current-date-display">{{ initial_date }}</span></h2>
+        <div id="seat-map" class="seat-map">
+            <!-- Seat map will be loaded here by JavaScript -->
+            Loading seats...
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const employeeId = {{ employee_info.employee_id }};
+    const initialDate = "{{ initial_date }}";
+    const initialFloor = {{ floors[0] if floors else 1 }};
+</script>
+<script src="{{ url_for('static', filename='js/booking.js') }}"></script>
+{% endblock %}

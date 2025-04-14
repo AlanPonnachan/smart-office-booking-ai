@@ -1,0 +1,66 @@
+{# --- templates/admin.html --- #}
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="admin-container">
+    <header>
+        <h1>Admin Dashboard</h1>
+        <div class="user-info">
+            Welcome, Admin User (ID: {{ admin_id }})
+            <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+        </div>
+    </header>
+
+    
+    <div class="admin-actions">
+        <h2>Seat Occupancy Prediction</h2>
+        <p>Generate seat occupancy predictions for the upcoming week...</p>
+        <p><strong>Status:</strong> <span id="prediction-status-message">{{ last_prediction_status }}</span></p>
+        <button id="trigger-prediction-btn" class="btn-primary">Run Weekly Prediction</button>
+        <div id="prediction-result" style="margin-top: 15px;"></div>
+    </div>
+    <hr>
+   
+
+    {# --- NEW Link to Graphs Page --- #}
+    <div class="admin-actions">
+        <h2>Visualizations</h2>
+        <p>View graphs showing employee relationships and connections.</p>
+        <a href="{{ url_for('admin_graphs') }}" class="btn btn-info">View Relationship Graphs</a> {# Use button styling if desired #}
+    </div>
+    <hr>
+    {# ----------------------------- #}
+
+
+    <h2>Other Admin Tools</h2>
+    <p>(Placeholder for future admin features)</p>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+{# Keep the existing script for triggering predictions #}
+<script>
+$(document).ready(function() {
+    const triggerBtn = $('#trigger-prediction-btn');
+    if (triggerBtn.length) { // Only add listener if button exists
+        const statusMsg = $('#prediction-status-message');
+        const resultDiv = $('#prediction-result');
+        triggerBtn.on('click', function() {
+            // ... (Keep prediction trigger JS logic) ...
+             if (!confirm('Run prediction process?')) return;
+             triggerBtn.prop('disabled', true).text('Running...'); statusMsg.text('Processing...'); resultDiv.text('');
+             fetch('/api/admin/trigger_predictions', { method: 'POST', headers: {'Content-Type': 'application/json'} })
+             .then(response => response.json().then(data => ({ status: response.status, body: data })))
+             .then(({ status, body }) => {
+                 if (status >= 200 && status < 300 && body.success) { statusMsg.text(`Completed.`); resultDiv.text(body.message); setTimeout(() => location.reload(), 1500); }
+                 else { throw new Error(body.message || `Failed with status ${status}`); } })
+             .catch(error => { console.error('Error triggering predictions:', error); statusMsg.text('Failed.'); resultDiv.text(`Error: ${error.message}`); })
+             // .finally(() => { /* triggerBtn.prop('disabled', false).text('Run'); */ }); // Don't re-enable if reloading
+        });
+    }
+});
+</script>
+{% endblock %}
