@@ -1,0 +1,271 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.container, .login-container, .booking-container {
+    max-width: 1200px;
+    margin: auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-container {
+    max-width: 400px;
+    margin-top: 50px;
+}
+
+h1, h2 {
+    text-align: center;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="number"], select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Include padding in width */
+}
+
+input[type="radio"] {
+    margin-right: 5px;
+}
+
+button {
+    background-color: #5cb85c;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 5px;
+}
+
+button:hover {
+    background-color: #4cae4c;
+}
+
+.logout-btn {
+    float: right;
+    background-color: #d9534f;
+    color: white;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-left: 15px;
+}
+.logout-btn:hover {
+    background-color: #c9302c;
+}
+
+.alert {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    text-align: center;
+}
+.alert-danger {
+    background-color: #f2dede;
+    color: #a94442;
+    border: 1px solid #ebccd1;
+}
+.alert-success {
+    background-color: #dff0d8;
+    color: #3c763d;
+    border: 1px solid #d6e9c6;
+}
+
+header {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    overflow: hidden; /* Clear floats */
+}
+
+.user-info {
+    font-size: 0.9em;
+    color: #555;
+    margin-top: 10px;
+    text-align: right;
+}
+
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    align-items: center;
+}
+
+.controls label {
+    margin-right: 5px;
+    font-weight: bold;
+}
+
+.date-nav, .mode-nav, .floor-nav {
+    display: flex;
+    align-items: center;
+}
+
+.date-btn, .mode-btn {
+    padding: 8px 12px;
+    background-color: #eee;
+    border: 1px solid #ccc;
+}
+.date-btn.active, .mode-btn.active {
+    background-color: #5bc0de;
+    color: white;
+    border-color: #46b8da;
+}
+
+#floor-select {
+    padding: 8px;
+    min-width: 150px;
+    width: auto; /* Override default width */
+}
+
+.legend {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.legend-item {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+    border: 1px solid #ccc;
+    vertical-align: middle;
+}
+.legend-item.available { background-color: #90EE90; } /* Light Green */
+.legend-item.occupied { background-color: #F08080; } /* Light Coral */
+.legend-item.fixed { background-color: #ADD8E6; } /* Light Blue */
+.legend-item.my-booking { background-color: #FFD700; } /* Gold */
+
+#seat-map-container h2 {
+    text-align: left;
+    font-size: 1.2em;
+    margin-bottom: 15px;
+}
+
+.seat-map {
+    display: grid; /* Use grid for layout */
+    gap: 15px; /* Spacing between zones */
+}
+
+.zone {
+    border: 1px dashed #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.zone-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 1.1em;
+}
+
+.row {
+    display: flex;
+    justify-content: center; /* Center seats in the row */
+    margin-bottom: 5px;
+}
+
+.seat {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    margin: 3px;
+    display: flex;
+    flex-direction: column; /* Stack seat ID and employee ID */
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7em;
+    cursor: pointer;
+    position: relative; /* For tooltips or extra info */
+    overflow: hidden; /* Hide overflowing text */
+    text-align: center;
+    background-color: #eee; /* Default */
+    transition: background-color 0.2s ease;
+}
+.seat span {
+    display: block;
+    line-height: 1.1;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.seat .seat-id-display{
+    font-size: 0.9em;
+    font-weight: bold;
+}
+.seat .employee-id-display{
+    font-size: 0.8em;
+    color: #333;
+}
+
+
+/* Seat Status Colors */
+.seat.available {
+    background-color: #90EE90; /* Light Green */
+    cursor: pointer;
+}
+.seat.occupied {
+    background-color: #F08080; /* Light Coral */
+    cursor: not-allowed;
+}
+.seat.fixed {
+    background-color: #ADD8E6; /* Light Blue */
+    cursor: not-allowed;
+}
+.seat.my-booking {
+    background-color: #FFD700; /* Gold */
+    cursor: pointer; /* Allow cancellation */
+    border: 2px solid #DAA520;
+}
+
+/* Add hover effects */
+.seat.available:hover {
+    background-color: #7CCD7C; /* Darker Green */
+    border-color: #666;
+}
+.seat.my-booking:hover {
+    background-color: #EEC900; /* Darker Gold */
+}
+
+
+/* Make the grid responsive for zones */
+@media (min-width: 600px) {
+    .seat-map {
+        grid-template-columns: repeat(2, 1fr); /* 2 zones per row on medium screens */
+    }
+}
+@media (min-width: 900px) {
+    .seat-map {
+        grid-template-columns: repeat(4, 1fr); /* 4 zones per row on larger screens */
+    }
+}
