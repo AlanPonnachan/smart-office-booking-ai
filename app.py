@@ -152,7 +152,6 @@ def recommend_seat(static_context, dynamic_context_employee,fused_seats_df_strin
     reason: [brief explanation]
 
     If action_status=confirmed that means user requested seat_id is confirmed. If action_status=denied that means user requested seat_id is denied( for this case  you must find a recommend_seat )
-    In the output I don't want to see any other text that the format.
     """
     
     client = GENERATIVE_AI_CLIENT
@@ -220,7 +219,7 @@ Provide the output as a simple list,  in the format:
 you have to list all (employee_id:seat_id, resason) corresponding to all employees for the completion of output. means for some employees will be already occcupied and need not to predict for a seat, here you don't need to predict but while giving output from the data just show the occupied seat by employee.
 In the output you generate should be only like this:
 (employee_id: which seat_id assigned, reason for this seat assignment in detail )
-In the output I don't want to see any other text
+In the output  don't include any other text
 
     """
 
