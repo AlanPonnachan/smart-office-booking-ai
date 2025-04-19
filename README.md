@@ -80,7 +80,7 @@ Employee can login with employee_id and Admin can login admin_id
 7.  **LLM Decision & Recommendation:**
     *   The LLM analyzes the request based on the provided data and rules.
     *   It returns a JSON response indicating if the action is `confirmed` or `denied`, a `reason`, and if denied, potentially a `recommended_seat` alternative.
-  
+  ![booking](images/booking.png)
    
 8.  **Backend Processing:**
     *   If **confirmed**, the backend updates the in-memory booking store for the web session.
@@ -89,6 +89,8 @@ Employee can login with employee_id and Admin can login admin_id
     *   If **confirmed**, the frontend refreshes the seat map to reflect the successful booking/cancellation. A success message is shown.
     *   If **denied**, the frontend displays the denial reason. If a recommendation was provided, it may prompt the user to book the recommended seat.
 10. **Confirmation:** User sees the updated seat map and receives feedback (alert/message) about the outcome of their request.
+11. **Admin Dashboard:** Admins can login using the admin_id. In the Admin dashboard they will be to see the statistics and able to run weekly predictions.
+ ![Admin Dashboard](images/admin_dash.png)
 
 ## How the LLM Assists
 
