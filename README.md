@@ -32,6 +32,7 @@ Integrating an LLM offers significant advantages over traditional booking system
 
 ## System Architecture
 
+![Login Window](images/architecture.png)
 The system comprises several key components:
 
 1.  **Frontend UI:**
@@ -68,7 +69,9 @@ Employee can login with employee_id and Admin can login admin_id
 ![Login Window](images/login_window.png)
 
 2.  **Access Booking Interface:** User navigates to the seat booking page, selecting a date and floor.
+
 3.  **View Seat Map:** The frontend displays the seat map for the selected date/floor, showing real-time availability based on data fetched from the backend (which considers fixed assignments, simulated occupancy, and web bookings).
+![Employee Dashboard](images/employee_dash.png)
 4.  **Select Seat:** User clicks on an available seat *or* a seat they have already booked (to cancel).
 5.  **Backend Request:** The frontend sends a request to the backend API (`/api/book`) with the user ID, seat ID, date, and action (`book` or `cancel`).
 6.  **LLM Consultation:**
@@ -77,6 +80,8 @@ Employee can login with employee_id and Admin can login admin_id
 7.  **LLM Decision & Recommendation:**
     *   The LLM analyzes the request based on the provided data and rules.
     *   It returns a JSON response indicating if the action is `confirmed` or `denied`, a `reason`, and if denied, potentially a `recommended_seat` alternative.
+  
+   
 8.  **Backend Processing:**
     *   If **confirmed**, the backend updates the in-memory booking store for the web session.
     *   If **denied**, the backend relays the denial reason and any recommendation to the frontend.
