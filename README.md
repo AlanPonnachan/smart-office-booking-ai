@@ -165,16 +165,7 @@ Key backend API endpoints include:
 *   **Backend:** Flask can scale, but for very high traffic, consider asynchronous frameworks or deploying multiple instances behind a load balancer.
 *   **Real-Time Updates:** Current in-memory store is simple. For multi-instance deployments, a shared cache (Redis) or database locks would be needed for consistent real-time state.
 
-## Screenshots
 
-1.  **Employee Booking Dashboard:** Shows the main seat selection interface with the floor map, date/floor selectors, and legend.
-    ![Employee Dashboard](placeholder_dashboard.png) <!-- Replace with actual image path -->
-
-2.  **LLM Recommendation - Scenario 1 (Seat Unavailable):** Shows an alert or modal after a user clicks an occupied seat, displaying the LLM's denial reason and a suggested alternative seat.
-    ![LLM Suggestion - Unavailable](placeholder_suggestion_unavailable.png) <!-- Replace with actual image path -->
-
-3.  **LLM Recommendation - Scenario 2 (Booking Confirmed):** Shows a success message after a booking is confirmed by the LLM and backend.
-    ![LLM Confirmation](placeholder_confirmation.png) <!-- Replace with actual image path -->
 
 ## Technology Stack
 
@@ -185,17 +176,3 @@ Key backend API endpoints include:
 *   **Graph Analysis:** NetworkX
 *   **Plotting (Admin):** Matplotlib
 
-## Getting Started
-
-*(TODO: Add instructions on how to set up the environment, install dependencies, configure API keys, and run the application locally.)*
-
-```bash
-# Example steps (replace with actual commands)
-git clone https://github.com/your-username/smart-office-booking-ai.git
-cd smart-office-booking-ai
-python -m venv venv
-source venv/bin/activate # or venv\Scripts\activate on Windows
-pip install -r requirements.txt
-# Configure your Google API Key (e.g., set GOOGLE_API_KEY environment variable or update in code)
-# Set FLASK_SECRET_KEY environment variable
-flask run
